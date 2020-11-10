@@ -34,7 +34,7 @@ class Loader extends HTMLElement {
   }
 
   fetchApp(appName) {
-    return fetch(`https://stellar-cuddly-spleen.glitch.me/${appName}.js`).then(
+    return fetch(`https://cerulean-difficult-mouse.glitch.me/${appName}.js`).then(
       res => res.text()
     );
   }
@@ -43,7 +43,7 @@ class Loader extends HTMLElement {
     this.renderFn = Function(`
       "use strict";
       ${appCode};
-      return (domElement, config) => render(domElement, config);
+      return render;
     `)();
   }
 
