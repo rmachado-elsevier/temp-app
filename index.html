@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Hello!</title>
+    
+    <!-- import the webpage's stylesheet -->
+    <script src="/loader.js"></script>
+  </head>  
+  <body>
+    <input type="text" value="World" oninput='document.querySelector("app-composer[name=\"fragment\"]").setAttribute("config", "{\"name\": \"" + this.value + "\" }")' />
+    <app-composer name="fragment"></app-composer>
+    <app-composer id="test" name="fragment2"></app-composer>
+  </body>
+</html>
