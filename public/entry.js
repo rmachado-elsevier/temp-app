@@ -8,9 +8,10 @@ function render(domElement, config) {
             entry => `https://cerulean-difficult-mouse.glitch.me/build/${entry}`
           )
       )
-      .then(listOfEntrypoints =>
-        Promise.all(listOfEntrypoints.map(entry => fetch(entry)))
-      )
+      .then(listOfEntrypoints => {
+        console.log('listOfEntrypoints', listOfEntrypoints);
+        return Promise.all(listOfEntrypoints.map(entry => fetch(entry).then(res => res.text())))
+      })
       .then(contentOfEntrypoints =>
         contentOfEntrypoints.reduce(
           (output, content) => `${output}\n${content}`,
