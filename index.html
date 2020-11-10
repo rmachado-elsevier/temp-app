@@ -13,6 +13,6 @@
   <body>
     <input type="text" value="World" oninput='document.querySelector("app-composer[name=\"fragment\"]").setAttribute("config", "{\"name\": \"" + this.value + "\" }")' />
     <app-composer name="fragment"></app-composer>
-    <app-composer name="build/entry"></app-composer>
+    <app-composer name="build/entry" onload="window.renderTempApp()"></app-composer>
   </body>
 </html>

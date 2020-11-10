@@ -1,6 +1,6 @@
 class Loader extends HTMLElement {
   static get observedAttributes() {
-    return ["name", "config"];
+    return ["name", "config", "onload"];
   }
 
   constructor() {
@@ -8,8 +8,9 @@ class Loader extends HTMLElement {
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    const config = this.getAttribute("config") || "{}";
     const appName = this.getAttribute("name");
+    const config = this.getAttribute("config") || "{}";
+    const config = this.getAttribute("onload") || (() => {});
 
     this.renderFn = null;
     this.config = JSON.parse(config);
@@ -41,10 +42,12 @@ class Loader extends HTMLElement {
 
   createRenderFunction(appCode) {
     this.renderFn = Function(`
-      console.log('outsider this', this);
       "use strict";
       ${appCode};
-      return render.bind(this);
+      if (render) {
+        return render.bind(this)
+      }
+      return () => ${this.onload}
     `).call(this);
   }
 
