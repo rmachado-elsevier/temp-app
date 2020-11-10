@@ -8,7 +8,7 @@ ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-  '%DOM_ELEMENT%'
+  document.getElementById('test')
 );
 
 
