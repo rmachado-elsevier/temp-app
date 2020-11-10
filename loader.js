@@ -10,10 +10,10 @@ class Loader extends HTMLElement {
   attributeChangedCallback(name, oldValue, newValue) {
     const appName = this.getAttribute("name");
     const config = this.getAttribute("config") || "{}";
-    const config = this.getAttribute("onload") || (() => {});
-
+    
     this.renderFn = null;
     this.config = JSON.parse(config);
+    this.onload = this.getAttribute("onload") || (() => {});
 
     this.init(appName);
   }
