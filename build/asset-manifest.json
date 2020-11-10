@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "https://cerulean-difficult-mouse.glitch.me/build/static/css/main.ab7136cd.chunk.css",
+    "main.js": "https://cerulean-difficult-mouse.glitch.me/build/static/js/main.c77889e0.chunk.js",
+    "main.js.map": "https://cerulean-difficult-mouse.glitch.me/build/static/js/main.c77889e0.chunk.js.map",
+    "runtime-main.js": "https://cerulean-difficult-mouse.glitch.me/build/static/js/runtime-main.18976285.js",
+    "runtime-main.js.map": "https://cerulean-difficult-mouse.glitch.me/build/static/js/runtime-main.18976285.js.map",
+    "static/js/2.b6febcfb.chunk.js": "https://cerulean-difficult-mouse.glitch.me/build/static/js/2.b6febcfb.chunk.js",
+    "static/js/2.b6febcfb.chunk.js.map": "https://cerulean-difficult-mouse.glitch.me/build/static/js/2.b6febcfb.chunk.js.map",
+    "static/js/3.197bd5ff.chunk.js": "https://cerulean-difficult-mouse.glitch.me/build/static/js/3.197bd5ff.chunk.js",
+    "static/js/3.197bd5ff.chunk.js.map": "https://cerulean-difficult-mouse.glitch.me/build/static/js/3.197bd5ff.chunk.js.map",
+    "index.html": "https://cerulean-difficult-mouse.glitch.me/build/index.html",
+    "static/css/main.ab7136cd.chunk.css.map": "https://cerulean-difficult-mouse.glitch.me/build/static/css/main.ab7136cd.chunk.css.map",
+    "static/js/2.b6febcfb.chunk.js.LICENSE.txt": "https://cerulean-difficult-mouse.glitch.me/build/static/js/2.b6febcfb.chunk.js.LICENSE.txt",
+    "static/media/logo.103b5fa1.svg": "https://cerulean-difficult-mouse.glitch.me/build/static/media/logo.103b5fa1.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.18976285.js",
+    "static/js/2.b6febcfb.chunk.js",
+    "static/css/main.ab7136cd.chunk.css",
+    "static/js/main.c77889e0.chunk.js"
+  ]
+}
