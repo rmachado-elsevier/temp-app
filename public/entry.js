@@ -18,16 +18,11 @@ function render(domElement, config) {
       )
     )
     .then(code => {
-      console.log(`
-        "use strict";
-        ${code}
-        return render;
-      `);
       const reactApp = Function(`
-        "use strict";
+        console.log('insider render', render);
         ${code}
-        return render;
-      `)();
+        return render.bind(this);
+      `).call(this);
 
       reactApp(domElement, config);
     });

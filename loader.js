@@ -41,10 +41,11 @@ class Loader extends HTMLElement {
 
   createRenderFunction(appCode) {
     this.renderFn = Function(`
+      console.log('outsider this', this);
       "use strict";
       ${appCode};
-      return render;
-    `)();
+      return render.bind(this);
+    `).call(this);
   }
 
   renderApp() {
