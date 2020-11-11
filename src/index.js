@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-window.renderTempApp = (domElement, config) => {
+document.currentScript.loadFragment((domElement, config) => {
   return ReactDOM.render(
     <React.StrictMode>
       <App config={config} />
@@ -14,7 +14,7 @@ window.renderTempApp = (domElement, config) => {
       window.unmountTempApp = () => ReactDOM.unmountComponentAtNode(domElement);
     }
   );
-};
+});
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
