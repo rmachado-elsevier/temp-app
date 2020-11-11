@@ -11,10 +11,14 @@ class Loader extends HTMLElement {
     const appName = this.getAttribute("name");
     const config = this.getAttribute("config") || "{}";
 
-    this.renderFn = null;
     this.config = JSON.parse(config);
 
-    this.init(appName);
+    if (name === "config") {
+      this.renderApp();
+    } else {
+      this.renderFn = null;
+      this.init(appName);
+    }
   }
 
   init(appName) {
@@ -25,7 +29,7 @@ class Loader extends HTMLElement {
       return;
     }
 
-    this.fetchApp(appName)
+    return this.fetchApp(appName)
       .then(appCode => this.createRenderFunction(appCode))
       .then(() => this.renderApp())
       .catch(err => {
@@ -47,8 +51,17 @@ class Loader extends HTMLElement {
   }
 
   renderApp() {
+    console.log(this.renderFn);
     this.renderFn(this, this.config);
   }
 }
 
 customElements.define("app-composer", Loader);
+
+/*
+<AppComposer name="my-data" config={...} />
+
+===> React.memo(({ name, config}) => {
+  <app-composer name={name} config={config}></app-composer>
+}, () => true);
+*/

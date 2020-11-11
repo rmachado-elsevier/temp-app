@@ -9,3 +9,8 @@ h1 {
   font-style: italic;
   color: #373fff;
 }
+
+.grid {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
