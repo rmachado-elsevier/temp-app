@@ -10,10 +10,9 @@ class Loader extends HTMLElement {
   attributeChangedCallback(name, oldValue, newValue) {
     const appName = this.getAttribute("name");
     const config = this.getAttribute("config") || "{}";
-    
+
     this.renderFn = null;
     this.config = JSON.parse(config);
-    this.onload = this.getAttribute("onload") || (() => {});
 
     this.init(appName);
   }
@@ -35,20 +34,16 @@ class Loader extends HTMLElement {
   }
 
   fetchApp(appName) {
-    return fetch(`https://cerulean-difficult-mouse.glitch.me/${appName}.js`).then(
-      res => res.text()
-    );
+    return fetch(
+      `https://cerulean-difficult-mouse.glitch.me/${appName}.js`
+    ).then(res => res.text());
   }
 
   createRenderFunction(appCode) {
     this.renderFn = Function(`
-      "use strict";
       ${appCode};
-      if (render) {
-        return render.bind(this)
-      }
-      return () => ${this.onload}
-    `).call(this);
+      return render.bind(this)
+    `).call(this, this.config);
   }
 
   renderApp() {
