@@ -1,18 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Hello!</title>
-    
+    <link href="/style.css" rel="stylesheet" type="text/css" />
+
     <!-- import the webpage's stylesheet -->
     <script src="/loader.js"></script>
-  </head>  
+  </head>
   <body>
-    <input type="text" value="World" oninput='document.querySelector("app-composer[name=\"fragment\"]").setAttribute("config", "{\"name\": \"" + this.value + "\" }")' />
+    <input
+      placeholder="World"
+      type="text"
+      value="World"
+      oninput='document.querySelector("app-composer[name=\"fragment\"]").setAttribute("config", "{\"name\": \"" + this.value + "\" }")'
+    />
     <app-composer name="fragment"></app-composer>
-    <app-composer name="entry"></app-composer>
+    <div class="grid">
+      <app-composer
+        name="temp-app"
+        config='{"resolveFrom": "https://cerulean-difficult-mouse.glitch.me/build/asset-manifest.json"}'
+      ></app-composer>
+      <app-composer
+        name="my-data"
+        config='{"resolveFrom": "http://localhost:5000/asset-manifest.json"}'
+      ></app-composer>
+    </div>
+    <app-composer
+      name="temp-app"
+      config='{ "resolveFrom": "https://cerulean-difficult-mouse.glitch.me/build/asset-manifest.json" }'
+      name="my-data"
+      config='{"whatever": "123"}'
+    ></app-composer>
   </body>
 </html>
+
+<script>
+  /*  
+  config = {
+    resolveFrom: 'https://...',
+  };
+  
+  apps = {
+    'full url': Promise
+  }
+
+  eventBus.listen('get-app', (e) => {
+    appRequests[e.data.name].push({ domElement: e.data.domElement, config: e.data.config });
+    Loader.getApp(e.data);
+    
+    
+  })
+  
+  
+  // for the first one...
+  eventBus.listen('register-app', (e) => {
+    const { appName, cb } = e.data;
+    const { domElement, config } = appRequests[appName][0];
+    const unMountFn = cb(domElement, config);
+    
+  })
+  
+  appRequests = {
+    'my-data': [
+      0: { domElement: <app-composer>...<app-composer>, config: {...}, appData: ... },
+      1: { domElement: <app-composer>...<app-composer>, config: {...} },
+      2: { domElement: <app-composer>...<app-composer>, config: {...} },
+      3: { domElement: <app-composer>...<app-composer>, config: {...} },
+      4: { domElement: <app-composer>...<app-composer>, config: {...} },
+    ]
+  }
+  
+  
+  // This runs in the Main application loading the fragments (on app-composing)
+  eventBus.dispatch('get-app', {
+    config: {},
+    name: 'my-data',
+    domElement: <app-composer>...</app-composer>,
+  });
+  
+  // Runs in the index of the React App fragment
+  eventBus.dispatch('register-app', {
+    appName: 'my-data',
+    cb: (domElement, config) => {
+      ReactDOM.render(<App config={config}, domElement);
+      return () => ReactDOM.unmountComponentAtNode(domElement);
+    }
+  });
+*/
+</script>
