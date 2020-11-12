@@ -1,18 +1,18 @@
-function render(domElement, config) {
+document.currentScript.loadFragment(function render(domElement, config) {
   const onFinishedLoading = () => window.renderMyData(domElement, config);
 
   fetch("http://localhost:5000/asset-manifest.json")
-    .then(res => res.json())
-    .then(manifest => {
+    .then((res) => res.json())
+    .then((manifest) => {
       let loadCounter = 0;
       const entrypoints = manifest.entrypoints.filter(
-        entry => entry.endsWith(".js") || entry.endsWith(".css")
+        (entry) => entry.endsWith(".js") || entry.endsWith(".css")
       );
       const onEntryLoad = () => {
         if (++loadCounter === entrypoints.length) onFinishedLoading();
-        console.log('loaded', loadCounter);
+        console.log("loaded", loadCounter);
       };
-      entrypoints.forEach(entry => {
+      entrypoints.forEach((entry) => {
         let entryTag;
         if (entry.endsWith(".js")) {
           entryTag = document.createElement("script");
@@ -28,4 +28,4 @@ function render(domElement, config) {
         document.head.appendChild(entryTag);
       });
     });
-}
+});

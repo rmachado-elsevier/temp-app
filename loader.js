@@ -1,10 +1,6 @@
 /** TODO: Set this to our own Registry for base requests */
 const REGISTRY_URL = "https://cerulean-difficult-mouse.glitch.me";
 
-function pascalCase(str) {
-  return str.replace(/(^\w|-\w)/g, text => text.replace(/-/, "").toUpperCase());
-}
-
 if (!("currentScript" in document)) {
   const currentScriptPolyfillTag = document.createElement("script");
   currentScriptPolyfillTag.src = `${REGISTRY_URL}/currentScript.polyfill.js`;
@@ -54,15 +50,34 @@ class Loader extends HTMLElement {
         console.error(err);
       });
   }
-  
+
   loadAppCode({ key }) {
     if (!appsRegistry[key]) {
-      appsRegistry[key] = fetch(`${REGISTRY_URL}/${this.appName}.js`)
-        .then(res => res.text())
-        .then(appCode => this.createRenderFunction(appCode))
+      appsRegistry[key] = new Promise(resolve => {
+        this.generateEntryTag({
+          baseUrl: REGISTRY_URL,
+          entry: `${this.appName}.js`,
+          resolve
+        });
+      });
     }
-    
+
     return appsRegistry[key];
+  }
+
+  generateEntryTag({ baseUrl, entry, resolve }) {
+    let entryTag;
+    if (entry.endsWith(".js")) {
+      entryTag = document.createElement("script");
+      entryTag.src = `${baseUrl}/${entry}`;
+    } else {
+      entryTag = document.createElement("link");
+      entryTag.href = `${baseUrl}/${entry}`;
+      entryTag.rel = "stylesheet";
+      entryTag.type = "text/css";
+    }
+    entryTag.loadFragment = resolve;
+    document.head.appendChild(entryTag);
   }
 
   loadAppUsingManifest({ key, url }) {
@@ -75,20 +90,9 @@ class Loader extends HTMLElement {
           .then(manifest => {
             manifest.entrypoints
               .filter(entry => entry.endsWith(".js") || entry.endsWith(".css"))
-              .forEach(entry => {
-                let entryTag;
-                if (entry.endsWith(".js")) {
-                  entryTag = document.createElement("script");
-                  entryTag.src = `${baseUrl}/${entry}`;
-                } else {
-                  entryTag = document.createElement("link");
-                  entryTag.href = `${baseUrl}/${entry}`;
-                  entryTag.rel = "stylesheet";
-                  entryTag.type = "text/css";
-                }
-                entryTag.loadFragment = resolve;
-                document.head.appendChild(entryTag);
-              });
+              .forEach(entry =>
+                this.generateEntryTag({ baseUrl, entry, resolve })
+              );
           });
       });
     }
@@ -104,13 +108,6 @@ class Loader extends HTMLElement {
     }
 
     return this.loadAppCode({ key: this.appName });
-  }
-
-  createRenderFunction(appCode) {
-    return Function(`
-      ${appCode};
-      return render.bind(this)
-    `).call(this);
   }
 
   renderApp(render) {

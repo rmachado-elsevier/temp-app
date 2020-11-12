@@ -4,10 +4,17 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+const AppComposer = React.memo(({ config }) => {
+  return (
+    <app-composer name="my-data" config={JSON.stringify(config)}></app-composer>
+  );
+});
+AppComposer.displayName = "AppComposer";
+
 document.currentScript.loadFragment((domElement, config) => {
   return ReactDOM.render(
     <React.StrictMode>
-      <App config={config} />
+      <AppComposer config={config} />
     </React.StrictMode>,
     domElement,
     () => {
