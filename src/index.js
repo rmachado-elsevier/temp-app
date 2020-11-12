@@ -14,7 +14,9 @@ AppComposer.displayName = "AppComposer";
 document.currentScript.loadFragment((domElement, config) => {
   return ReactDOM.render(
     <React.StrictMode>
-      <AppComposer config={config} />
+      <AppComposer
+        config={{ resolveFrom: "http://localhost:5000/asset-manifest.json" }}
+      />
     </React.StrictMode>,
     domElement,
     () => {
