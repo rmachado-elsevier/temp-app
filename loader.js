@@ -5,13 +5,11 @@ function pascalCase(str) {
   return str.replace(/(^\w|-\w)/g, text => text.replace(/-/, "").toUpperCase());
 }
 
-/*
 if (!("currentScript" in document)) {
   const currentScriptPolyfillTag = document.createElement("script");
   currentScriptPolyfillTag.src = `${REGISTRY_URL}/currentScript.polyfill.js`;
   document.head.appendChild(currentScriptPolyfillTag);
 }
-*/
 
 const appsRegistry = {};
 
